@@ -1,0 +1,69 @@
+# SaveBite
+
+A CSC207 team project for managing food purchases, date reminders and food waste.
+
+## Team
+
+| Member | Planned feature ownership |
+|---|---|
+| Xiangyu Zhou | Record purchases, create products with barcode lookup, inventory and date reminders |
+| Kenny Gu | Edit/archive products, mark batch outcomes, spending reports |
+
+Xiangyu also leads storage, API integration and application assembly. Both members review shared contracts and each other's PRs.
+
+## Current version: shared foundations
+
+This version provides the data model and interfaces for parallel feature development:
+
+- `Product` and `Purchase` entities, with categories, date sources, statuses and alert levels.
+- `ProductDataAccessInterface` and `PurchaseDataAccessInterface` for finding, listing and saving records.
+- `ProductLookupGateway`, `ProductLookupResult` and lookup exceptions for future barcode lookup.
+- In-memory product and purchase storage.
+- Maven configuration and 18 entity tests.
+
+There is no runnable application window yet. Swing screens, use-case implementations, JSON persistence and live API integration are planned. In-memory data is lost when the process ends.
+
+## Core rules
+
+- A product describes an item; a purchase represents one batch.
+- Batches are marked eaten or discarded as a whole.
+- Passing a target date does not automatically discard a batch.
+- Estimated dates are reminders, not food safety guarantees.
+- Purchase prices represent batch totals in CAD.
+
+## Requirements and tests
+
+Install Java 17 or newer and Maven. From the project root:
+
+```bash
+mvn test
+```
+
+This compiles the foundation code and runs the tests. The current version has no `Main` class; `mvn exec:java` is not available yet.
+
+## Project structure
+
+```text
+docs/                        Development agreement and API contracts
+src/main/java/savebite/
+  entity/                    Products, purchase batches and enums
+  use_case/                  Shared storage and lookup contracts
+  data_access/               In-memory implementations
+src/test/java/savebite/       Entity tests and shared test data
+pom.xml                      Java version, dependencies and build configuration
+```
+
+## Development guide
+
+See [Development Agreement and API Contracts](docs/development-agreement.md) for feature ownership, interface names and the planned workflow. Exact signatures and behaviour are documented in the Java interfaces. Develop against these interfaces using in-memory storage while persistent storage is unfinished.
+
+## Planned MVP
+
+1. Create products manually or retrieve details through Open Food Facts.
+2. Record purchase batches and confirmed target dates.
+3. View inventory and date reminders.
+4. Edit and archive products.
+5. Mark whole batches eaten or discarded.
+6. Report spending and discarded value, with JSON storage across restarts.
+
+External API: [Open Food Facts documentation](https://openfoodfacts.github.io/openfoodfacts-server/api/). This version defines the lookup contract only; it does not call the service.
