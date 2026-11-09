@@ -11,13 +11,14 @@ A CSC207 team project for managing food purchases, date reminders and food waste
 
 Xiangyu also leads storage, API integration and application assembly. Both members review shared contracts and each other's PRs.
 
-## Current version: purchase recording and batch outcomes
+## Current version: product creation, purchases and batch outcomes
 
 - Shared product and purchase entities, data access interfaces, and in-memory storage.
+- UC2 creates products manually or fills in their name and brand through Open Food Facts barcode lookup.
 - UC1 records purchase batches, validates inputs, and supports confirmed target dates.
 - UC5 marks a whole batch as eaten or discarded and prevents repeated processing.
 
-The purchase dialog and batch outcome panel will be connected to the main window during integration. In-memory data is lost when the process ends. JSON persistence and live API integration are planned.
+The product and purchase dialogs and the batch outcome panel will be connected to the main window during integration. In-memory data is lost when the process ends. JSON persistence is planned.
 
 ## Core rules
 
@@ -62,4 +63,4 @@ See [Development Agreement and API Contracts](docs/development-agreement.md) for
 5. Mark whole batches eaten or discarded.
 6. Report spending and discarded value, with JSON storage across restarts.
 
-External API: [Open Food Facts documentation](https://openfoodfacts.github.io/openfoodfacts-server/api/). This version defines the lookup contract only; it does not call the service.
+External API: [Open Food Facts documentation](https://openfoodfacts.github.io/openfoodfacts-server/api/). The gateway calls the service when the product dialog requests a lookup. Manual entry is available if lookup fails.
