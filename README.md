@@ -11,17 +11,13 @@ A CSC207 team project for managing food purchases, date reminders and food waste
 
 Xiangyu also leads storage, API integration and application assembly. Both members review shared contracts and each other's PRs.
 
-## Current version: batch outcomes
+## Current version: purchase recording and batch outcomes
 
-This version provides the data model and interfaces for parallel feature development:
+- Shared product and purchase entities, data access interfaces, and in-memory storage.
+- UC1 records purchase batches, validates inputs, and supports confirmed target dates.
+- UC5 marks a whole batch as eaten or discarded and prevents repeated processing.
 
-- `Product` and `Purchase` entities, with categories, date sources, statuses and alert levels.
-- `ProductDataAccessInterface` and `PurchaseDataAccessInterface` for finding, listing and saving records.
-- `ProductLookupGateway`, `ProductLookupResult` and lookup exceptions for future barcode lookup.
-- In-memory product and purchase storage.
-- Maven configuration and 18 entity tests.
-
-UC5 (Mark Purchase Outcome) now includes its business logic, controller, presenter, view model, action panel and tests. It records whole-batch outcomes and handles repeated operations and save failures. The action panel will be connected to inventory during integration. There is no standalone application entry point yet. Other features, JSON persistence and live API integration are planned. In-memory data is lost when the process ends.
+The purchase dialog and batch outcome panel will be connected to the main window during integration. In-memory data is lost when the process ends. JSON persistence and live API integration are planned.
 
 ## Core rules
 
